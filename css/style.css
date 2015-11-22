@@ -1,0 +1,25 @@
+ body {
+     margin: 0;
+     padding: 0;
+     font-family: sans-serif;
+     font-size: 15px;
+     line-height: 18px;
+     overflow: hidden;
+     background: black
+ }
+
+ #canvas {
+     position: relative;
+     width: 100%;
+     max-width: 1024px;
+     height: auto;
+     padding: 0;
+     margin: 0 auto;
+     height: auto;
+ }
+
+ #DEBUG {
+     z-index: 666;
+     font-size: 100px;
+     color: white
+ }

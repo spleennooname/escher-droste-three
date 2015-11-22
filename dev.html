@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  	
+
+  	<script id="droste-vs" type="x-shader/x-vertex">
+
+  	 	#ifdef GL_ES
+   	     	precision highp float;
+        #endif
+   
+  	    varying vec2 vUv;
+  	    varying vec3 vNormal;
+		varying vec3 vViewPosition;
+		varying vec3 vModelPosition;
+
+		void main() {
+
+			//transform the vertex  from model space to clip coordinates
+		    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+		    vNormal = normalize( normal *normalMatrix);
+
+		    vec4 mvPosition = modelMatrix * vec4(position, 1.0 );
+
+		    vViewPosition = -mvPosition.xyz;
+
+		    vModelPosition = position;
+		    
+		    //texture position
+		    vUv = uv;
+
+		}
+
+	</script>
+	<script  id="droste-fs" type="x-shader/x-fragment">
+
+	        #ifdef GL_ES
+   	     	 	precision highp float;
+        	#endif
+
+        	#define pi 3.14159265358979323846
+        	#define factor 256.0
+        	#define pi2 6.2831853071
+        	
+        	/* three */
+
+	   		varying vec2 vUv;
+			varying vec3 vNormal;
+			varying vec3 vViewPosition;
+			varying vec3 vModelPosition;
+
+			/* luci */
+
+			uniform vec3 lightPosition;
+			uniform vec3 lightColor;
+
+			/* escher-droste */
+	
+	   		uniform sampler2D texture;
+        	uniform vec2 size;        	
+        	uniform float time;
+        	uniform float p1,p2;
+               	
+        	vec2 cmul(vec2 a,vec2 b) {
+            	return vec2(a.x*b.x - a.y*b.y, a.x*b.y + a.y*b.x );
+	        }
+	         
+	        vec2 clog(vec2 v) {
+	         	return vec2( 0.5 * log(v.x*v.x+v.y*v.y), atan(v.y,v.x) );
+	        }	         
+
+			void main() {
+
+				/* escher-droste */
+
+				vec2 position = -1.0 + 2.0 * vUv;			
+         		vec2 logpos = clog(position);                  
+         		vec2 transformed = cmul( logpos, vec2(p2, -p1*log(factor)/pi2 ) );
+         		vec2 uv = vec2( -transformed.y/pi2, transformed.x/log(factor) - time *.2 );   
+         		vec3 color = texture2D( texture, uv).rgb;
+         		
+				// compute direction to light
+				vec3 L = normalize( vec3( viewMatrix * vec4( lightPosition, 0.0 ) ).xyz);
+				vec3 N = normalize( vNormal );
+				// compute larmbertian diffusion			
+				float diffuse = max( dot( N, L ), 0.0);
+
+         		
+         		color *= diffuse * lightColor; 
+                gl_FragColor = vec4( color, 1.0);
+			}
+
+	   </script>
+	   <link rel="stylesheet" media="screen" href="css/style.css" />    
+</head>
+
+<body>
+	<div class="" id="canvas"></div>
+	<script src="js/scripts.min.js"></script>
+   	<script src="js/escher-droste.js"></script>
+</body>
+</html>

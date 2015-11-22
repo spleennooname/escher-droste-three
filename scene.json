@@ -1,0 +1,71 @@
+{
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "AE3FB646-1121-457C-A9EE-0D4D91119393",
+			"type": "SphereGeometry",
+			"radius": 100,
+			"widthSegments": 32,
+			"heightSegments": 32,
+			"phiStart": 0,
+			"phiLength": 3.14,
+			"thetaStart": 1,
+			"thetaLength": 0.64
+		}],
+	"materials": [
+		{
+			"uuid": "B94C22B3-7F0D-4073-95C4-2E3F4804BB28",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30,
+			"vertexColors": 1,
+			"transparent": true,
+			"wireframe": true
+		}],
+	"object": {
+		"uuid": "6A2748BF-9999-4BCF-AFE6-95E7BC6CDD4D",
+		"type": "Scene",
+		"name": "Scene",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "8C9237F3-A492-4392-AB89-C8315A40B249",
+				"type": "Mesh",
+				"name": "Sphere 1",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,3.1812453269958496,0,0,1],
+				"geometry": "AE3FB646-1121-457C-A9EE-0D4D91119393",
+				"material": "B94C22B3-7F0D-4073-95C4-2E3F4804BB28"
+			},
+			{
+				"uuid": "A5694F41-5546-434D-A754-DE2AB2518BE1",
+				"type": "PointLight",
+				"name": "PointLight 1",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-197.4811553955078,-153.2510528564453,-324.1941223144531,1],
+				"color": 16580608,
+				"intensity": 14.22,
+				"distance": 0,
+				"decay": 33.16
+			},
+			{
+				"uuid": "058C338F-F0AF-4DA0-94B1-68453369E7A9",
+				"type": "AmbientLight",
+				"name": "AmbientLight 2",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"color": 2236962
+			},
+			{
+				"uuid": "34FD0B82-D27D-4594-9397-B7BEFDF145A9",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight 3",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-766.580078125,79.76329803466797,631.1380615234375,1],
+				"color": 16777215,
+				"intensity": 1
+			}]
+	}
+}
