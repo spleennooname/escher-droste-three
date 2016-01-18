@@ -106,7 +106,6 @@
          		vec2 uv = vec2( -transformed.y/pi2, transformed.x/log(factor) - time *.2 );   
          		vec3 color = texture2D( texture, uv).rgb;
 
-
       			float diffuse = 0.0;
       			float specular =0.0;
       			vec4 lights = vec4(0.0, 0.0, 0.0, 1.0);
@@ -166,7 +165,6 @@
     			//color *= vignette;
 
     			
-
 				//out
                 gl_FragColor = vec4( color, 1.0);
 			}
