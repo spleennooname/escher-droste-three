@@ -1,7 +1,7 @@
 desktop.ini
-1024x1024
+/1024x1024
 *.jpg
 --*.html
-node_modules
+/node_modules
 *.png
 readme.txt
