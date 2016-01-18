@@ -3,5 +3,5 @@ desktop.ini
 *.jpg
 --*.html
 node_modules
-preview.png
+*.png
 readme.txt
