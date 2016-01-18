@@ -52,10 +52,16 @@
 			varying vec3 vViewPosition;
 			varying vec3 vModelPosition;
 
-			/* luci */
+			/* lights */
 
-			uniform vec3 lightPosition;
-			uniform vec3 lightColor;
+			uniform vec3 pointLightColor[MAX_POINT_LIGHTS];
+			uniform vec3 pointLightPosition[MAX_POINT_LIGHTS];
+			uniform float pointLightDistance[MAX_POINT_LIGHTS];
+
+			uniform vec3 uSpecularColor;
+			uniform float uKd;
+			uniform float uKs;
+			uniform float shininess;
 
 			/* escher-droste */
 	
@@ -74,29 +80,83 @@
 
 			void main() {
 
-				/* escher-droste */
+				vec2 pos = -1.0 + 2.0 * vUv;		
 
-				vec2 position = -1.0 + 2.0 * vUv;			
-         		vec2 logpos = clog(position);                  
+				/* escher-droste */
+					
+         		vec2 logpos = clog(pos);                  
          		vec2 transformed = cmul( logpos, vec2(p2, -p1*log(factor)/pi2 ) );
          		vec2 uv = vec2( -transformed.y/pi2, transformed.x/log(factor) - time *.2 );   
          		vec3 color = texture2D( texture, uv).rgb;
-         		
-				// compute direction to light
-				vec3 L = normalize( vec3( viewMatrix * vec4( lightPosition, 0.0 ) ).xyz);
-				vec3 N = normalize( vNormal );
-				// compute larmbertian diffusion			
-				float diffuse = max( dot( N, L ), 0.0);
 
+
+      			float diffuse = 0.0;
+      			float specular =0.0;
+      			vec4 lights = vec4(0.0, 0.0, 0.0, 1.0);
+         		for(int i = 0; i < MAX_POINT_LIGHTS; i++) {
+
+         			// compute direction to light
+					vec3 L = normalize( vec3( viewMatrix * vec4( pointLightPosition[i], 0.0 ) ).xyz);
+					vec3 N = normalize( vNormal );
+
+					// compute larmbertian diffusion	
+					diffuse = max( dot( N, L ), 0.0);
+
+					// specular: N * H to a power. H is light vector + view vector
+					vec3 viewPosition = normalize( vViewPosition );
+					vec3 pointHalfVector = normalize( L + viewPosition );
+					float pointDotNormalHalf = max( dot( vNormal, pointHalfVector ), 0.0 );
+					specular = uKs * pow( pointDotNormalHalf, shininess );
+					specular *= (8.0 + shininess)/(8.0*3.14);
+
+					// however, if N * L is < 0, the light is below the horizon and should not affect the surface
+					// This can give a hard termination to the highlight, but it's better than some weird sparkle.
+					if (diffuse <= 0.0) {
+						specular = 0.0;
+					}
+				 		
+					lights.rgb += diffuse * pointLightColor[i] + uSpecularColor * specular;
+         		}
+			
+         		color *= lights.rgb;
          		
-         		color *= diffuse * lightColor; 
+         		/** post film +noise+scanlines *
+
+         		float sCount = 512.0;
+         		float sIntensity = .45;
+         		float nIntensity = .65;
+         		// sample the source
+				vec3 cTextureScreen = color;
+				// make some noise
+				float x = pos.x * pos.y * time *  1000.0;
+				x = mod( x, 13.0 ) * mod( x, 123.0 );
+				float dx = mod( x, 0.01 );
+				// add noise
+				vec3 cResult = cTextureScreen + cTextureScreen * clamp( 0.1 + dx * 100.0, 0.0, 1.0 );
+				// get us a sine and cosine
+				vec2 sc = vec2( sin( pos.y * sCount ), cos( pos.y * sCount ) );
+				// add scanlines
+				cResult += cTextureScreen * vec3( sc.x, sc.y, sc.x ) * sIntensity;
+				// interpolate between source and result by intensity
+				cResult = cTextureScreen + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen );
+				color = cResult;*/
+
+
+
+
+         	    //vignetting
+         	    //float vignette = 1. - dot( pos*.25, pos*.25);
+    			//color *= vignette;
+
+    			
+
+				//out
                 gl_FragColor = vec4( color, 1.0);
 			}
 
 	   </script>
 	   <link rel="stylesheet" media="screen" href="css/style.css" />    
 </head>
-
 <body>
 	<div class="" id="canvas"></div>
 	<script src="js/scripts.min.js"></script>

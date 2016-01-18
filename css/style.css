@@ -17,7 +17,12 @@
      margin: 0 auto;
      height: auto;
  }
-
+ 
+ #canvas > canvas{
+     display: block;
+     width: 100%;
+     height: auto
+ }
  #DEBUG {
      z-index: 666;
      font-size: 100px;

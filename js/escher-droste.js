@@ -4,7 +4,6 @@ var composer;
 
 var clock;
 
-//var texture_url = "https://dl.dropboxusercontent.com/u/1358781/lab/grey_512x512.jpg";
 var texture_url = "https://dl.dropboxusercontent.com/u/1358781/lab/grey_one_1024x1024.jpg",
     texture_size = 1024;
 
@@ -22,16 +21,16 @@ var data = {
 
 };
 
-var luce_obj ={
-    x:-0.095,
-    y:-0.625,
-    z:-0.38
+var luce_obj = {
+    x: -0.095,
+    y: -0.625,
+    z: -0.38
 }
 
-var mesh_obj ={
-    x:3.0,
-    y:4.0,
-    z:3.7
+var mesh_obj = {
+    x: 3.0,
+    y: 4.0,
+    z: 3.7
 }
 
 var max_width = 1024;
@@ -51,53 +50,56 @@ function init() {
 
     if (!Detector.webgl) {
         Detector.addGetWebGLMessage();
-
     }
 
-    var  h =window.innerHeight, 
-         w =window.innerWidth >max_width? max_width: window.innerWidth;
-       
+    var h = window.innerHeight,
+        w = window.innerWidth < max_width ? window.innerWidth : max_width;
+
     gui = new dat.GUI();
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 200);
+    camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 250);
     camera.aspect = w / h;
-    camera.position.set(0, 0, 100);
+    camera.position.set(20, 0, 150);
     camera.lookAt(scene.position);
 
     scene.add(camera);
 
     clock = new THREE.Clock();
-
-       renderer = new THREE.WebGLRenderer({
+    renderer = new THREE.WebGLRenderer({
         antialias: false,
         preserveDrawingBuffer: true
     });
-     //renderer.setViewport(0, h/2, w, h/2);
-    var devicePixelRatio = window.devicePixelRatio || 1; // Evaluates to 2 if Retina
-   
-   
+
+    //var devicePixelRatio = window.devicePixelRatio || 1; // Evaluates to 2 if Retina
+    //console.log(devicePixelRatio)
+
     //renderer.enableScissorTest ( true );
     //renderer.setScissor(0, 60, w, h);
 
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
-    renderer.setSize( w/devicePixelRatio, h/devicePixelRatio);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(w, h);
     renderer.setViewport(0, 0, w, h);
+    // renderer.setPixelRatio(window.devicePixelRatio);
+    //
+
+    console.log(window.devicePixelRatio)
+
+    //renderer.setViewport(0, 0, w, h);
     renderer.setClearColor(0x000000);
 
     document.getElementById("canvas").appendChild(renderer.domElement);
 
     /* post */
 
-    render_fx = new THREE.RenderPass(scene, camera);
+    //render_fx = new THREE.RenderPass(scene, camera);
 
 
-   // var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+    // var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
     //effectCopy.renderToScreen = true;*/
-    
+
     /*hrtilt_fx = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
     hrtilt_fx.uniforms.r.value = .25;
     hrtilt_fx.uniforms.h.value = 1 / h;*/
@@ -106,25 +108,25 @@ function init() {
     vrtilt_fx.uniforms.r.value = .25;
     vrtilt_fx.uniforms.v.value = 1 /w*/
 
-    film_fx = new THREE.ShaderPass(THREE.FilmShader);
-    film_fx.uniforms.nIntensity.value = 0.75;
-    film_fx.uniforms.sIntensity.value = 0.35;
+    /*film_fx = new THREE.ShaderPass(THREE.FilmShader);
+    film_fx.uniforms.nIntensity.value = 0.55;
+    film_fx.uniforms.sIntensity.value = 0.25;
     film_fx.uniforms.sCount.value = 512;
     film_fx.uniforms.grayscale.value = 0;
 
-    vignette_fx = new THREE.ShaderPass(THREE.VignetteShader);
-    vignette_fx.uniforms.offset.value = 1.5;
-    vignette_fx.uniforms.darkness.value = .98;
-    vignette_fx.renderToScreen = true;
+    film_fx.renderToScreen = true;*/
 
-    composer = new THREE.EffectComposer(renderer);
-    composer.addPass( render_fx );
-    //composer.addPass(effectCopy);
-   // composer.addPass( escher_fx );
+    /*vignette_fx = new THREE.ShaderPass(THREE.VignetteShader);
+    vignette_fx.uniforms.offset.value = 1.5;
+    vignette_fx.uniforms.darkness.value = .98;*/
+
+
+    //composer = new THREE.EffectComposer(renderer);
+    //composer.addPass(render_fx);
     //composer.addPass(vrtilt_fx);
     //composer.addPass(hrtilt_fx);
-    composer.addPass(film_fx);
-    composer.addPass(vignette_fx);
+    //composer.addPass(film_fx);
+    //composer.addPass(vignette_fx);
 
     /*controls *
 
@@ -142,21 +144,21 @@ function init() {
 
     /* lights */
 
-    lights[0] = new THREE.PointLight( 0xffffff, 1, 100 )
-    lights[0].position.set(1,0,1);
+    lights[0] = new THREE.PointLight(0xffffff, 1, 100)
+    lights[0].position.set(1, 1, 1);
 
-     lights[1] = new THREE.PointLight( 0xff0000, .5, 100 )
-    lights[1].position.set(1,0,1);
+    lights[1] = new THREE.PointLight(0xff0000, .15, 100)
+    lights[1].position.set(1, 0, 1);
 
-    lights[2] = new THREE.AmbientLight(0x333333); // 0.2
-   
-   
- 
+    lights[2] = new THREE.PointLight(0x00ffff, .15, 100)
+    lights[2].position.set(15, 195, 200);
 
-    scene.add(lights[0]);
-    scene.add(lights[1]);
-    scene.add(lights[2]);
+    lights[3] = new THREE.AmbientLight(0x222222); // 0.2
 
+    for (var i=0; i <= lights.length-1;  i++ ){
+        scene.add(lights[i]);    
+    }
+    
     /*stats */
 
     stats = new rStats({
@@ -177,33 +179,30 @@ function init() {
 
     /* ui */
 
-
     var folder = gui.addFolder('Escher-Droste Controls');
-    folder.add(data, 'p1', -2, 2).step(1).onChange(update_escher);
-    folder.add(data, 'p2', -2, 2).step(1).onChange(update_escher);    
+    folder.add(data, 'p1', -2, 2).step(1).onChange(update_ui);
+    folder.add(data, 'p2', -2, 2).step(1).onChange(update_ui);
     folder.open();
 
-
-     var luci_ui = gui.addFolder('light direction');
-    luci_ui.add(luce_obj, "x", -1.0, 1.0, 0.025).name("x")
-    luci_ui.add(luce_obj, "y", -1.0, 1.0, 0.025).name("y")
-    luci_ui.add(luce_obj, "z", -1.0, 1.0, 0.025).name("z")
-    folder.open();
+   /*var luci_ui = gui.addFolder('light direction');
+    luci_ui.add(luce_obj, "x", -1.0, 1.0, 0.025).name("x").onChange(update_ui);
+    luci_ui.add(luce_obj, "y", -1.0, 1.0, 0.025).name("y").onChange(update_ui);
+    luci_ui.add(luce_obj, "z", -1.0, 1.0, 0.025).name("z").onChange(update_ui);
+    folder.open();*/
 
     var mesh_ui = gui.addFolder('mesh rotation');
-    mesh_ui.add(mesh_obj, "x", 0, 2*Math.PI, 0.025).name("x")
-    mesh_ui.add(mesh_obj, "y", 0, 2*Math.PI, 0.025).name("y")
-    mesh_ui.add(mesh_obj, "z", 0, 2*Math.PI, 0.025).name("z")
+    mesh_ui.add(mesh_obj, "x", 0, 2 * Math.PI, 0.025).name("x")
+    mesh_ui.add(mesh_obj, "y", 0, 2 * Math.PI, 0.025).name("y")
+    mesh_ui.add(mesh_obj, "z", 0, 2 * Math.PI, 0.025).name("z")
     folder.open();
-
 
     /* mesh */
 
     var loader_manager = new THREE.LoadingManager();
 
-    var loader_texture = new THREE.TextureLoader( loader_manager);
+    var loader_texture = new THREE.TextureLoader(loader_manager);
     loader_texture.crossOrigin = "anonymous";
-    
+
     loader_texture.load(
         texture_url,
         run,
@@ -225,9 +224,12 @@ function run(texture) {
 
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.x =  texture_size;
-    texture.repeat.y =  texture_size;
+    texture.format = THREE.RGBFormat;
+    
+    texture.repeat.set(0.998, 0.998);
+    texture.offset.set(0.001, 0.001);
     texture.needsUpdate = true;
+
     texture.magFilter = THREE.NearestFilter;
     texture.anisotropy = renderer.getMaxAnisotropy();
 
@@ -237,12 +239,17 @@ function run(texture) {
     });*/
 
     material = new THREE.ShaderMaterial({
+
         uniforms: THREE.UniformsUtils.merge([
-            THREE.UniformsLib['lights'], 
-            {
+            THREE.UniformsLib['lights'], {
+
                 time: {
                     type: "f",
                     value: 0.0
+                },
+                size: {
+                    type: "v2",
+                    value: new THREE.Vector2(texture_size, texture_size)
                 },
                 p1: {
                     type: "f",
@@ -256,78 +263,93 @@ function run(texture) {
                     type: "t",
                     value: texture
                 },
-                lightPosition: {
-                    type: "v3",
-                    value: new THREE.Vector3()
+                
+                uSpecularColor: { 
+                    type: "c", 
+                    value: new THREE.Color( 0x00FFFF ) 
                 },
-                lightColor: {
-                    type: "c",
-                    value: new THREE.Color( 0xffffff )
+                uKd: {
+                    type: "f",
+                    value: 0.7
                 },
-                size: {
-                    type: "v2",
-                    value: new THREE.Vector2( texture_size, texture_size)
+                uKs: {
+                    type: "f",
+                    value: 0.3
+                },
+                shininess: {
+                    type: "f",
+                    value: 100.0
                 }
+
             }
         ]),
         vertexShader: document.getElementById('droste-vs').textContent,
         fragmentShader: document.getElementById('droste-fs').textContent,
-        //lights: true,
-        fog:true,
-        side: THREE.FrontSide
+        lights: true,
+        fog: true
     });
 
-    material.needsUpdate = true ;
+    material.needsUpdate = true;
     material.uniforms.texture.value = texture;
-    material.uniforms.lightPosition.value = lights[0].position;
-    material.uniforms.lightColor.value = lights[0].color;
+
+     // material.uniforms.lightPosition.value = lights[0].position;
+   // material.uniforms.lightColor.value = lights[0].color;
 
     //mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(200, 200, 16, 16), material);
     mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(50, 32, 32), material);
 
     scene.add(mesh);
 
-    mesh.rotation.set(mesh_obj.x, mesh_obj.y, mesh_obj.z);
-    lights[0].position.set( luce_obj.x, luce_obj.y, luce_obj.z );
-    camera.position.set(-20, -10, 100);
+    mesh.rotation.set(mesh_obj.x, mesh_obj.y, mesh_obj.z);    
+    //lights[0].position.set(luce_obj.x, luce_obj.y, luce_obj.z);
+
+    camera.position.set(0, 0, 120);
 
     render();
 
 }
 
-function update_escher() {
+function update_ui() {
     material.uniforms.p2.value = data.p2;
     material.uniforms.p1.value = data.p1;
+
+    mesh.rotation.set(mesh_obj.x, mesh_obj.y, mesh_obj.z);
+
+    //lights[0].position.set(luce_obj.x, luce_obj.y, luce_obj.z);
+
 }
 
 /* render */
 
 function render() {
 
-     stats('frame').start();
+    stats('frame').start();
     stats('rAF').tick();
     stats('FPS').frame();
 
-
     time = Date.now() * 0.001;
     delta = clock.getDelta();
-   
-    material.uniforms.time.value += delta * .35;
-    film_fx.uniforms.time.value += delta * .35;
 
-    lights[0].position.set( luce_obj.x, luce_obj.y, luce_obj.z );
-    mesh.rotation.set(mesh_obj.x, mesh_obj.y, mesh_obj.z);
+    requestAnimationFrame(render);
 
-        //console.log(  luce_obj.x, luce_obj.y, luce_obj.z, " mesh ",  mesh_obj.x, mesh_obj.y, mesh_obj.z )
+    material.uniforms.time.value += delta * .25;
+
+    lights[0].position.x = Math.sin( time ) * 200;
+    lights[0].position.y = Math.cos( time ) * 200;
+    lights[0].position.z = Math.sin( time ) * 50;
+
+    lights[1].position.x = Math.cos( time ) *200;
+    lights[1].position.z = Math.sin( time ) * 200;
+    lights[1].position.y = Math.cos( time ) * 200;
+
 
     //controls.update(delta);
-    composer.render(delta);
+    //composer.render(delta);
+
+    renderer.render( scene, camera );
 
     stats('frame').end();
     stats().update();
-
-
-    requestAnimationFrame(render);
 
 };
 
@@ -335,6 +357,21 @@ function render() {
 window.addEventListener('load', function() {
     init();
 })
+
+function onWindowResize() {
+
+  var h = window.innerHeight,
+        w = window.innerWidth < max_width ? window.innerWidth : max_width;
+
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    renderer.setViewport(0, 0, w, h);
+
+    //composer.render(delta);
+
+    renderer.render( scene, camera );
+}
 
 
 /*function onDocumentMouseDown( event ) {
@@ -410,21 +447,3 @@ window.addEventListener('load', function() {
             }
 
         }*/
-
-function onWindowResize() {
-
-    var h =window.innerHeight,
-        w = window.innerWidth > max_width ? max_width : window.innerWidth;
-        
-
-  camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-
-    //vrtilt_fx.uniforms.v.value = 1 / w;
-    //hrtilt_fx.uniforms.h.value = 1 / h;
-
-    //16:9
-    renderer.setSize(w,h);
-    renderer.setViewport(0, 0, w, h);
-    //composer.reset();
-}
