@@ -3,10 +3,10 @@
 Escher-Droste custom shader with ThreeJS. Play with controls.
 
 tech stack: ThreeJS + custom shader
-credits: TOOL && the beautiful art of Alex Grey
+credits: TOOL && the [beautiful art of Alex Grey](http://alexgrey.com/)
 
-2 pointlights, vertex/fragment on page, lambertian reflectance.
-Still in progress, any suggestions, comments or criticism welcome.
+2 pointlights, vertex/fragment on page, lambertian reflectance (diffuse + specular light)
+Still in progress. Any suggestions, comments or criticism welcome.
 
 ### Your browser has WebGL support? check it
 [webglreport](http://webglreport.com/?v=1]) or  [can i use](http://caniuse.com/#feat=webgl)
