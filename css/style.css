@@ -1,30 +1,159 @@
- body {
+ 
+ html{
+     font: 16px/1.2 sans-serif;
+ }
+
+ body{
+     font-size: 1em;
+    -webkit-text-size-adjust: 1em;
+    -ms-text-size-adjust: 1em;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
      margin: 0;
      padding: 0;
-     font-family: sans-serif;
-     font-size: 15px;
-     line-height: 18px;
      overflow: hidden;
+     text-align: center;
      background: black
  }
 
- #canvas {
+ #three-demo{
      position: relative;
-     width: 100%;
-     max-width: 1024px;
-     height: auto;
-     padding: 0;
      margin: 0 auto;
-     height: auto;
+     max-width: 1024px;
+     width: 64em;
+     height: 100%;
+     z-index: 0;
+     display: inline-block;
+     background: red
+
  }
- 
- #canvas > canvas{
-     display: block;
+
+#three-demo  canvas{
      width: 100%;
-     height: auto
- }
+     height: 100%;
+     margin: 0;
+     padding: 0;
+     touch-action: none;
+     -ms-touch-action: none
+}
+
  #DEBUG {
      z-index: 666;
      font-size: 100px;
      color: white
+ }
+
+.rs-base{
+     z-index: 1;
+     background-color: transparent;
+}
+
+.rs-base div.rs-counter-base {
+
+}
+
+.rs-base span.rs-counter-id {
+
+}
+
+.rs-base div.rs-counter-value {
+
+}
+
+body.dg{
+     background: red
+}
+
+@-webkit-viewport {
+    width: device-width;
+}
+
+@-moz-viewport {
+    width: device-width;
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
+}
+
+/* <=840, phone landscape */
+
+@media only screen and (max-width: 60em) {
+    html {
+        font-size: 17px;
+        line-height: 28px;
+    }
+
+     #three-demo{
+          width: 100%;
+     } 
+}
+
+/* <=600, phone landscape */
+
+@media only screen and (max-width: 37.50em) {
+    html {
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+        
+}
+
+
+/* <=480, window xsmall */
+
+@media only screen and (max-width: 34.30em) {
+    html {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+
+/* <=360, ph.portrait */
+
+@media only screen and (max-width: 30em) {
+    html {
+        font-size: 13px;
+        line-height: 19px;
+    }
+
+
+}
+
+
+@media only screen and (min-width: 61em) {
+    html {
+        font-size: 17px;
+        line-height: 28px;
+    }
+
+     #three-demo{
+          width: 100%;
+     } 
+}
+
+
+ .what {
+     position: fixed;
+     left: 0;
+     z-index: 666;
+     left: 0;
+     top: 0;
+     color: white
+ }
+ 
+ .what h1 {
+     margin: 0;
+     text-align: left;
+     font: 400 .95rem/1.3rem 'Roboto Condensed', tahoma, sans-serif;
+     padding: .25rem .25rem
  }

@@ -5,3 +5,8 @@ normal.jpg
 node_modules
 preview.png
 readme.txt
+main-shadow.js
+index-phongmaterial-tween.html
+js/------escher-droste--pbr.js
+js/SmartPointLight.js
+vs_depth.glsl
