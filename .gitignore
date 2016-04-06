@@ -3,6 +3,6 @@
 --*.html
 node_modules
 *.js
-*.png
+*.png 
 *.txt
 *.json
