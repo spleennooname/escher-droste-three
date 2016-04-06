@@ -2,6 +2,7 @@
 *.jpg
 --*.html
 node_modules
+*.js
 *.png
 *.txt
 *.json
