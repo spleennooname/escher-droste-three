@@ -76,9 +76,9 @@ require(['app'],
 
         specularColor:"#ffffff",
 
-        roughness: .65,
-        albedo: .82,
-        shininess: 1.5
+        roughness: .44,
+        albedo: .35,
+        shininess: 1.3
     }
 
     var rstats_obj = {
@@ -164,7 +164,7 @@ require(['app'],
 
         // scene         
         scene = new THREE.Scene();
-        //scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+        //scene.fog = new THREE.FogExp2( 0x0, 1 );
 
         //camera
         camera = new THREE.PerspectiveCamera(45, container_dom.clientWidth / window.innerHeight, 0.01, 200);
@@ -180,13 +180,13 @@ require(['app'],
         controls.momentumDampingFactor = 0.8;
         controls.momentumScalingFactor = 0.005;
         controls.addEventListener("change",function(){
-           // console.info(camera.position.x, camera.position.y, camera.position.z,"|", camera.rotation.x, camera.rotation.y, camera.rotation.z)
+           console.info(camera.position.x, camera.position.y, camera.position.z,"|", camera.rotation.x, camera.rotation.y, camera.rotation.z)
         })
 
         // lights (module)
 
         lights[0] = new THREE.AmbientLight(0x000000);
-        lights[1] = new THREE.HemisphereLight(0xffffff, 0x000000, 1)
+        lights[1] = new THREE.DirectionalLight(0xffffff, .55); 
         //lights[2] = new THREE.PointLight(0xffffff, .25, 0);
         lights[2] = new THREE.DirectionalLight(0xffffff, .55); 
         //lights[3] = new THREE.PointLight(0xff0000, .25, 0);
@@ -197,7 +197,9 @@ require(['app'],
 
         /* loading */
 
-        load_files(['shaders/vert.glsl', 'shaders/frag.glsl' ], onload_shaders, onload_shaders_error); 
+        load_files([
+            'shaders/vert.glsl', 'shaders/frag.glsl' 
+            ], onload_shaders, onload_shaders_error); 
     }
 
     
@@ -263,20 +265,19 @@ require(['app'],
             fragmentShader: shader_n.fragmentShader,
             lights: true
         });
-        console.info( shader_n.vertexShader )
+        console.info( shader_n.vertexShader )*/
 
         material2 = new THREE.MeshPhongMaterial({
            specular: 0xffffff, shininess: 30, side: THREE.DoubleSide
         });
         material2.map = texture_shader
         material2.needsUpdate = true;
-        */
-
-        material = new THREE.ShaderMaterial({
+      
+        /*material = new THREE.ShaderMaterial({
                 uniforms:  uniforms ,
                 vertexShader: shaders[0],
                 fragmentShader: shaders[1],
-                side: THREE.FrontSide,
+                side: THREE.DoubleSide,
                 shading : THREE.SmoothShading,
                 fog: false,
                 lights: true                
@@ -289,21 +290,56 @@ require(['app'],
         material.uniforms.u_albedoColor =  u_pbr.u_albedoColor;
         material.uniforms.u_shinyness =  u_pbr.u_shinyness;
 
-        //geometry =  srf.toThreeGeometry()
-        //geometry = new THREE.PlaneGeometry(10, 32, 32);
-        //geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 )*/
-        geometry = new THREE.SphereGeometry(10, 32, 32);
+
+        // NURBS surface
+                var nsControlPoints = [
+                    [
+                        new THREE.Vector4 ( -200, -200, 100, 1 ),
+                        new THREE.Vector4 ( -200, -100, -200, 1 ),
+                        new THREE.Vector4 ( -200, 100, 250, 1 ),
+                        new THREE.Vector4 ( -200, 200, -100, 1 )
+                    ],
+                    [
+                        new THREE.Vector4 ( 0, -200, 0, 1 ),
+                        new THREE.Vector4 ( 0, -100, -100, 1 ),
+                        new THREE.Vector4 ( 0, 100, 150, 1 ),
+                        new THREE.Vector4 ( 0, 200, 0, 1 )
+                    ],
+                    [
+                        new THREE.Vector4 ( 200, -200, -100, 1 ),
+                        new THREE.Vector4 ( 200, -100, 200, 1 ),
+                        new THREE.Vector4 ( 200, 100, -250, 1 ),
+                        new THREE.Vector4 ( 200, 200, 100, 1 )
+                    ]
+                ];
+                var degree1 = 2;
+                var degree2 = 3;
+                var knots1 = [0, 0, 0, 1, 1, 1];
+                var knots2 = [0, 0, 0, 0, 1, 1, 1, 1];
+                var nurbsSurface = new THREE.NURBSSurface(degree1, degree2, knots1, knots2, nsControlPoints);;
+
+        
+         getSurfacePoint = function(u, v) {
+                    return nurbsSurface.getPoint(u, v);
+                };       */
+
+        //geometry = new THREE.ParametricGeometry( getSurfacePoint, 20, 20 )
+
+        //geometry = new THREE.SphereGeometry(10, 32, 32);
+        geometry = new THREE.DodecahedronGeometry(50, 6)
+        //geometry = new THREE.SphereGeometry(10, 32, 32);
         geometry.uvsNeedUpdate = true;
         geometry.buffersNeedUpdate = true;
 
         // mesh = geom + material
 
-        mesh = new THREE.Mesh(geometry,   material);
-        mesh.scale.multiplyScalar( 1 );
+        mesh = new THREE.Mesh(geometry,   material2);
+        //mesh.scale.multiplyScalar( 1 );
 
         scene.add( mesh);
 
         render_fx = new THREE.RenderPass(scene, camera); 
+
         film_fx = new THREE.ShaderPass(THREE.FilmShader);
         film_fx.uniforms.nIntensity.value = 0.35;
         film_fx.uniforms.sIntensity.value = 0.35;
@@ -338,8 +374,9 @@ require(['app'],
         window.addEventListener('resize', resize, false);
 
         camera.position.set(0, 0, 50);
-        lights[1].position.set( 20.0, 30.0, 100.0 );//dir
-        lights[2].position.set( -10.0, -30.0, 0.0); //point
+        mesh.position.set(0,0,0)
+        lights[1].position.set( 0.0, 0.0, 100.0 );//dir
+        lights[2].position.set( 0.0, 0.0, 0.0); //point
 
         //lights[3].position.set( -30.0, 0.0, -30.0);
         
@@ -353,21 +390,21 @@ require(['app'],
                                      //lights[1].rotation.set(this.rx, this.ry, this.z);
                             });
 
-        t1 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0, rz:0} )
-                            .to( { x : -18.0, y: -8.0, z: 11.0,  rz:-Math.PI/2, rx: -Math.PI/6, ry: -Math.PI/6}, 5000)
+        t1 = new TWEEN.Tween({ x : 10.810, y: 4.340, z: 200.11,   rx: -0.028, ry: 0, rz:0} )
+                            .to( { x : 10.810, y: 4.340, z: 151.11,   rx: -0.028, ry: 0, rz:0}, 5000)
                             .easing( TWEEN.Easing.Exponential.InOut )
                             .onUpdate(function(){
                                      camera.position.set(this.x, this.y, this.z);
-                                     camera.rotation.set(this.rx - Math.PI/4, this.ry, this.rz);
-                                     mesh.rotation.set( this.rx - 2*Math.PI, this.ry + 2*Math.PI, this.rz ) ;
+                                     camera.rotation.set(this.rx, this.ry, this.rz);
+                                     //mesh.rotation.set( this.rx - 2*Math.PI, this.ry + 2*Math.PI, this.rz ) ;
                             });
 
         t0.start();
         t1.start();
 
         //helpers
-         //scene.add( new THREE.DirectionalLightHelper( lights[1], 20 ));
-          //scene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
+        //scene.add( new THREE.HemisphericalLightHelper( lights[1], 20 ));
+        scene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
         /*scene.add( new THREE.AxisHelper( 50 ) );
        
         scene.add( new THREE.PointLightHelper( lights[2], 10 ))*/
@@ -400,10 +437,10 @@ require(['app'],
         delta = clock.getDelta();      
 
         //material
-        material.uniforms.time.value += delta * .25;
+        //material.uniforms.time.value += delta * .25;
 
         //post
-        film_fx.uniforms.time.value += delta * .65;
+        //film_fx.uniforms.time.value += delta * .65;
 
 
         /** scene
@@ -433,50 +470,12 @@ require(['app'],
         
     }
 
-    /* */
-
-    function load_file(url, data, cb_fn, err_cb_fn) {
-        var req = new XMLHttpRequest();
-        req.type="text";
-        req.open( 'GET', url, true);
-        req.onreadystatechange = function () {
-            if (req.readyState === 4) {
-                if ( req.status === 200 ) {
-                    cb_fn( req.responseText, data)
-                } else { 
-                    err_cb_fn( url );
-                }
-            }
-        };
-        req.send(null);    
-    }
-
-    function load_files(urls, cb_fn, err_cb_fn) {
-
-        var numUrls = urls.length;
-            numComplete = 0,
-            result = [],
-
-            // cbb
-            partial_cb = function(text, urlIndex) {            
-                result[urlIndex] = text;
-                numComplete++;
-                if (numComplete == numUrls) {
-                    cb_fn(result);
-                }
-            }
-
-            for (var i = 0; i < numUrls; i++) {
-                load_file( urls[i], i, partial_cb, err_cb_fn);
-            }
-    }
-
     function resize() {
 
         var w = container_dom.clientWidth,
             h = (3/4)*w;
 
-        container_dom.style.height = h+"px"
+            container_dom.style.height = h+"px"
 
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
@@ -504,6 +503,44 @@ require(['app'],
     }
 
 
+    /* loading shaders */
+
+    function load_file(url, data, cb_fn, err_cb_fn) {
+        var req = new XMLHttpRequest();
+        req.type="text";
+        req.open( 'GET', url, true);
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                // If we got HTTP status 200 (OK)
+                if ( req.status === 200 ) {
+                    cb_fn( req.responseText, data)
+                } else { // Failed
+                    err_cb_fn( url );
+                }
+            }
+        };
+        req.send(null);    
+    }
+
+    function load_files(urls, cb_fn, err_cb_fn) {
+
+        var numUrls = urls.length;
+            numComplete = 0,
+            result = [],
+
+            // cbb
+            partial_cb = function(text, urlIndex) {            
+                result[urlIndex] = text;
+                numComplete++;
+                if (numComplete == numUrls) {
+                    cb_fn(result);
+                }
+            }
+
+            for (var i = 0; i < numUrls; i++) {
+                load_file( urls[i], i, partial_cb, err_cb_fn);
+            }
+    }
 
     //events
 
