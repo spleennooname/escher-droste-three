@@ -190,7 +190,11 @@
                 vec2 logpos = clog(pos);                  
                 vec2 transformed = cmul( logpos, vec2(p2, -p1*log(factor)/PI2 ) );
                 vec2 uv = vec2( -transformed.y/PI2, transformed.x/log(factor) - time *.2 );   
+<<<<<<< HEAD
                 vec3 materialColor =  toLinear( texture2D( texture, uv).rgb, 2.0);
+=======
+                vec3 materialColor =  toLinear( texture2D( texture, uv).rgb, 2.2);
+>>>>>>> gh-pages
 
                 /* lights */
       
@@ -208,8 +212,13 @@
                         vec3 L = normalize( pointLightPosition[i] + vViewPosition.xyz );
                         vec3 N =  vNormal;
                       
+<<<<<<< HEAD
                         //vec3 V = normalize(cameraPosition - vViewPosition );
                         vec3 V = normalize( vViewPosition );
+=======
+                        vec3 V = normalize(cameraPosition - vViewPosition );
+
+>>>>>>> gh-pages
                         vec3 H = normalize( V + L );
 
                         atten = lightAttenuation( length( L ), pointLightDistance[ i ], pointLightDecay[ i ] );
@@ -221,7 +230,11 @@
 
                         totalDiffuseLight += diffuse * atten * pointLightColor[i] ;     
                         
+<<<<<<< HEAD
                         totalSpecularLight += spec * specularColor * pointLightColor[i] ;
+=======
+                        totalSpecularLight += spec * specularColor *  pointLightColor[i] ;
+>>>>>>> gh-pages
 
                     }
                 #endif
@@ -243,9 +256,15 @@
 
                         float diffuse = orenNayarDiffuse( L, V, N, u_roughness, u_albedo);
 
+<<<<<<< HEAD
                         totalDiffuseLight += diffuse * NdotL *directionalLightColor[i];
 
                         totalSpecularLight += spec * specularColor * directionalLightColor[i] ;
+=======
+                        totalDiffuseLight += diffuse * directionalLightColor[i];
+
+                        totalSpecularLight += spec * NdotL * specularColor * directionalLightColor[i] ;
+>>>>>>> gh-pages
                     }
                 #endif
 
@@ -254,7 +273,11 @@
 
 
 
+<<<<<<< HEAD
                 gl_FragColor = vec4( toGamma(color, 2.0), 1.0);
+=======
+                gl_FragColor = vec4( toGamma(color, 2.2), 1.0);
+>>>>>>> gh-pages
             }
 
        </script>

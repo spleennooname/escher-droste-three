@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /**
 // Configure Require.js
 var require_obj = {
@@ -65,7 +63,6 @@ require(['app'],
     })*/
 
 
->>>>>>> gh-pages
  var ui_controller = {
 
         lx: .0,
@@ -75,20 +72,13 @@ require(['app'],
         p1:-2,
         p2:-1,
 
-<<<<<<< HEAD
-        
-        roughness: .65,
-        albedo: .82,
-        shininess: .13
-=======
         albedoColor:"#000000",
 
         specularColor:"#ffffff",
 
-        roughness: .65,
-        albedo: .82,
-        shininess: 1.5
->>>>>>> gh-pages
+        roughness: .44,
+        albedo: .35,
+        shininess: 1.3
     }
 
     var rstats_obj = {
@@ -109,11 +99,7 @@ require(['app'],
 
     var last_time, now_time, delta, time, clock,
 
-<<<<<<< HEAD
-        geometry, renderer, material, mesh, scene, loader, camera, controls, composer,
-=======
         geometry, renderer, material, mesh, scene, loader, camera, controls, composer, shaders, 
->>>>>>> gh-pages
 
         tween,
 
@@ -130,11 +116,7 @@ require(['app'],
 
         rstats, rstats_obj, ui,
 
-<<<<<<< HEAD
-        container_dom ,
-=======
         container_dom,
->>>>>>> gh-pages
 
         t0, t1;
 
@@ -146,39 +128,15 @@ require(['app'],
 
          container_dom = document.getElementById("webgl-demo");
 
-<<<<<<< HEAD
-
-=======
->>>>>>> gh-pages
         if (Detector.webgl) {
 
             renderer = new THREE.WebGLRenderer({
                 antialias: false, // to get smoother output
-<<<<<<< HEAD
-                preserveDrawingBuffer: true // to allow screenshot
-=======
                 preserveDrawingBuffer: false // to allow screenshot
->>>>>>> gh-pages
             });            
             renderer.setClearColor( new THREE.Color(0x000000), 1);
             renderer.setPixelRatio( window.devicePixelRatio );
             renderer.gammaInput = true;
-<<<<<<< HEAD
-            renderer.gammaOutput = true;
-           // renderer.shadowMap.type = THREE.BasicShadowMap;
-            //renderer.shadowMap.enabled= true;
-
-            renderer.setSize( container_dom.clientWidth, window.innerHeight );
-            //renderer.sortObjects = true
-
-            var gl = renderer.domElement.getContext('webgl') || renderer.domElement.getContext('experimental-webgl');
-            var ext = gl.getExtension('OES_standard_derivatives')
-                if (!ext){
-                  Detector.addGetWebGLMessage();
-              }
-
-
-=======
             renderer.gammaOutput = true;           
             renderer.setSize( container_dom.clientWidth, window.innerHeight );
         
@@ -187,7 +145,6 @@ require(['app'],
                 if (!ext){
                   Detector.addGetWebGLMessage();
               }*/
->>>>>>> gh-pages
         } 
         else 
         {
@@ -202,25 +159,16 @@ require(['app'],
         stats = new rStats(rstats_obj);
 
         // three init
-<<<<<<< HEAD
-
-       
-=======
       
->>>>>>> gh-pages
         container_dom.appendChild(renderer.domElement);
 
         // scene         
         scene = new THREE.Scene();
-        //scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+        //scene.fog = new THREE.FogExp2( 0x0, 1 );
 
         //camera
         camera = new THREE.PerspectiveCamera(45, container_dom.clientWidth / window.innerHeight, 0.01, 200);
        
-<<<<<<< HEAD
-      
-=======
->>>>>>> gh-pages
         scene.add( camera );
 
         // controls (module)
@@ -229,54 +177,29 @@ require(['app'],
         controls.enableDamping = true;
 		controls.dampingFactor = 0.55;
         controls.update();
-<<<<<<< HEAD
-
-        controls.momentumDampingFactor = 0.8;
-        controls.momentumScalingFactor = 0.005;
-
-        // lights (module)
-
-        
-
-        lights[0] = new THREE.AmbientLight(0x000000);
-
-        lights[1] = new THREE.DirectionalLight(0xffffff, .65);        
-
-        lights[2] = new THREE.PointLight(0xff0000, .25, 0);
-        lights[3] = new THREE.PointLight(0xff0000, .25, 0);
-
-=======
         controls.momentumDampingFactor = 0.8;
         controls.momentumScalingFactor = 0.005;
         controls.addEventListener("change",function(){
-           // console.info(camera.position.x, camera.position.y, camera.position.z,"|", camera.rotation.x, camera.rotation.y, camera.rotation.z)
+           console.info(camera.position.x, camera.position.y, camera.position.z,"|", camera.rotation.x, camera.rotation.y, camera.rotation.z)
         })
 
         // lights (module)
 
         lights[0] = new THREE.AmbientLight(0x000000);
-        lights[1] = new THREE.HemisphereLight(0xffffff, 0x000000, 1)
+        lights[1] = new THREE.DirectionalLight(0xffffff, .55); 
         //lights[2] = new THREE.PointLight(0xffffff, .25, 0);
         lights[2] = new THREE.DirectionalLight(0xffffff, .55); 
         //lights[3] = new THREE.PointLight(0xff0000, .25, 0);
->>>>>>> gh-pages
    
         scene.add( lights[0] )
         scene.add( lights[1] );
         scene.add( lights[2] );
-<<<<<<< HEAD
-        //scene.add( lights[3] );
-
-        //load: texture
-        loader = new THREE.LoadingManager( onload );
-
-        texture_loader = new THREE.TextureLoader(loader);
-        texture_loader.crossOrigin = "anonymous";       
-=======
 
         /* loading */
 
-        load_files(['shaders/vert.glsl', 'shaders/frag.glsl' ], onload_shaders, onload_shaders_error); 
+        load_files([
+            'shaders/vert.glsl', 'shaders/frag.glsl' 
+            ], onload_shaders, onload_shaders_error); 
     }
 
     
@@ -293,27 +216,10 @@ require(['app'],
         loader = new THREE.LoadingManager( onload_material );
         texture_loader = new THREE.TextureLoader(loader);
         texture_loader.crossOrigin = "anonymous";      
->>>>>>> gh-pages
        
         texture_shader = texture_loader.load(texture_url_base+texture_url) ;
     }
 
-<<<<<<< HEAD
-      //loaded: material + fragment/vertex
-    function onload() {
-
-    // material
-        //texture_shader = set_texture( texture_shader);
-        //console.log("***", THREE.UniformsLib['lights'] )
-
-        texture_shader.wrapS = THREE.RepeatWrapping;
-        texture_shader.wrapT = THREE.RepeatWrapping;
-        //texture_shader.format = THREE.RGBFormat;
-
-        texture_shader.minFilter = THREE.NearestFilter;
-        texture_shader.magFilter = THREE.NearestFilter;
-        texture_shader.anisotropy = 16;          
-=======
     function onload_material() {
 
         texture_shader.wrapS = THREE.RepeatWrapping;
@@ -324,7 +230,6 @@ require(['app'],
         texture_shader.minFilter = THREE.LinearMipMapLinearFilter;
         texture_shader.magFilter =THREE.LinearFilter;
         texture_shader.anisotropy = renderer.getMaxAnisotropy();          
->>>>>>> gh-pages
     
         texture_size = 1024;
       
@@ -339,32 +244,19 @@ require(['app'],
         var u_pbr =  {
              u_fresnel: {type: "f", value: .47 },
              u_roughness: {type: "f", value: .65 },
-<<<<<<< HEAD
-             u_shinyness: {type: "f", value: .35 },
-=======
              u_shinyness: {type: "f", value: 1.5 },
              u_albedoColor: {type: "c", value: new THREE.Color( 0x000000 )   },
              u_specularColor: {type: "c", value: new THREE.Color( 0xffffff )   },
->>>>>>> gh-pages
              u_albedo: {type: "f", value: .82 },
              u_alpha: {type: "f", value: .8 }
         }
 
         var uniforms = THREE.UniformsUtils.merge([
-<<<<<<< HEAD
-            //THREE.UniformsLib.shadowmap,
-            THREE.UniformsLib.lights,
-=======
              THREE.UniformsLib.lights,
->>>>>>> gh-pages
             u_escher,
             u_pbr
         ]);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> gh-pages
         //simple lambert
         /**ar shader_n = THREE.ShaderLib["phong"];
         material_n = new THREE.ShaderMaterial({
@@ -373,35 +265,19 @@ require(['app'],
             fragmentShader: shader_n.fragmentShader,
             lights: true
         });
-<<<<<<< HEAD
         console.info( shader_n.vertexShader )*/
-
-        material2 = new THREE.MeshPhongMaterial({
-            color: 0xff0000, specular: 0xffffff, shininess: 30, shading: THREE.SmoothShading
-        });
-        material2.needsUpdate = true;
-        material2.map = texture_shader;
-
-        material = new THREE.ShaderMaterial({
-                uniforms:  uniforms ,
-                vertexShader: document.getElementById('droste-vert').textContent,
-                fragmentShader: document.getElementById('droste-frag').textContent,
-=======
-        console.info( shader_n.vertexShader )
 
         material2 = new THREE.MeshPhongMaterial({
            specular: 0xffffff, shininess: 30, side: THREE.DoubleSide
         });
         material2.map = texture_shader
         material2.needsUpdate = true;
-        */
-
-        material = new THREE.ShaderMaterial({
+      
+        /*material = new THREE.ShaderMaterial({
                 uniforms:  uniforms ,
                 vertexShader: shaders[0],
                 fragmentShader: shaders[1],
->>>>>>> gh-pages
-                side: THREE.FrontSide,
+                side: THREE.DoubleSide,
                 shading : THREE.SmoothShading,
                 fog: false,
                 lights: true                
@@ -409,45 +285,61 @@ require(['app'],
         material.uniforms.texture.value = texture_shader;
         material.uniforms.texture.needsUpdate = true;
         material.needsUpdate = true;
-<<<<<<< HEAD
-
-        material.uniforms.u_roughness = u_pbr.u_roughness;
-        material.uniforms.u_albedo =  u_pbr.u_albedo;
-        material.uniforms.u_shinyness =  u_pbr.u_shinyness;
-        
-        geometry = new THREE.SphereGeometry(10, 32, 32);
-        //geometry = new THREE.PlaneGeometry(10, 32, 32);
-        //geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 )
-=======
         material.uniforms.u_roughness = u_pbr.u_roughness;
         material.uniforms.u_albedo =  u_pbr.u_albedo;
         material.uniforms.u_albedoColor =  u_pbr.u_albedoColor;
         material.uniforms.u_shinyness =  u_pbr.u_shinyness;
 
-        //geometry =  srf.toThreeGeometry()
-        //geometry = new THREE.PlaneGeometry(10, 32, 32);
-        //geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 )*/
-        geometry = new THREE.SphereGeometry(10, 32, 32);
->>>>>>> gh-pages
+
+        // NURBS surface
+                var nsControlPoints = [
+                    [
+                        new THREE.Vector4 ( -200, -200, 100, 1 ),
+                        new THREE.Vector4 ( -200, -100, -200, 1 ),
+                        new THREE.Vector4 ( -200, 100, 250, 1 ),
+                        new THREE.Vector4 ( -200, 200, -100, 1 )
+                    ],
+                    [
+                        new THREE.Vector4 ( 0, -200, 0, 1 ),
+                        new THREE.Vector4 ( 0, -100, -100, 1 ),
+                        new THREE.Vector4 ( 0, 100, 150, 1 ),
+                        new THREE.Vector4 ( 0, 200, 0, 1 )
+                    ],
+                    [
+                        new THREE.Vector4 ( 200, -200, -100, 1 ),
+                        new THREE.Vector4 ( 200, -100, 200, 1 ),
+                        new THREE.Vector4 ( 200, 100, -250, 1 ),
+                        new THREE.Vector4 ( 200, 200, 100, 1 )
+                    ]
+                ];
+                var degree1 = 2;
+                var degree2 = 3;
+                var knots1 = [0, 0, 0, 1, 1, 1];
+                var knots2 = [0, 0, 0, 0, 1, 1, 1, 1];
+                var nurbsSurface = new THREE.NURBSSurface(degree1, degree2, knots1, knots2, nsControlPoints);;
+
+        
+         getSurfacePoint = function(u, v) {
+                    return nurbsSurface.getPoint(u, v);
+                };       */
+
+        //geometry = new THREE.ParametricGeometry( getSurfacePoint, 20, 20 )
+
+        //geometry = new THREE.SphereGeometry(10, 32, 32);
+        geometry = new THREE.DodecahedronGeometry(50, 6)
+        //geometry = new THREE.SphereGeometry(10, 32, 32);
         geometry.uvsNeedUpdate = true;
         geometry.buffersNeedUpdate = true;
 
         // mesh = geom + material
 
-<<<<<<< HEAD
-        mesh = new THREE.Mesh(geometry, material);
-=======
-        mesh = new THREE.Mesh(geometry,   material);
-        mesh.scale.multiplyScalar( 1 );
->>>>>>> gh-pages
+        mesh = new THREE.Mesh(geometry,   material2);
+        //mesh.scale.multiplyScalar( 1 );
 
         scene.add( mesh);
 
         render_fx = new THREE.RenderPass(scene, camera); 
-<<<<<<< HEAD
 
-=======
->>>>>>> gh-pages
         film_fx = new THREE.ShaderPass(THREE.FilmShader);
         film_fx.uniforms.nIntensity.value = 0.35;
         film_fx.uniforms.sIntensity.value = 0.35;
@@ -460,40 +352,6 @@ require(['app'],
         composer.addPass( render_fx ); 
         composer.addPass( film_fx );
 
-<<<<<<< HEAD
-        //ui (module)
-
-        ui = new dat.GUI();
-
-        var folder = ui.addFolder('escher-droste');
-        folder.add(ui_controller, 'p1', -2, 2).onChange(update_ui);
-        folder.add(ui_controller, 'p2', -2, 2).onChange(update_ui);
-        folder.open();
-
-        var folder = ui.addFolder('material');
-        folder.add(ui_controller, 'roughness', 0, 1).onChange(update_ui);
-        folder.add(ui_controller, 'albedo', 0, 1).onChange(update_ui);
-        folder.add(ui_controller, 'shininess', 0, 1).onChange(update_ui);
-        folder.open();
-
-       /*light1.colval = [light1.color.r * 255, light1.color.g * 255, light1.color.b * 255];
-        var light1ColCon = lightsFolder.addColor(light1, 'colval').name('Light 1 color');*/
-
-    /**light1ColCon.onChange(function(value){
-      light1.changeColor(value);
-    });
-    lightsFolder.add(light2, 'intensity', 0, 1).step(0.1).name('Light 2 intensity');
-    light2.colval = [light2.color.r * 255, light2.color.g * 255, light2.color.b * 255];
-    var light2ColCon = lightsFolder.addColor(light2, 'colval').name('Light 2 color'*/
-
-        /*var folder = ui.addFolder('Directional Light position');
-        folder.add( ui_controller, 'lx', 0, 2).name("x").onChange( update_ui);
-        folder.add( ui_controller, 'ly', 0, 2).name("y").onChange( update_ui);
-        folder.add( ui_controller, 'lz', 0, 2).name("z").onChange( update_ui);
-        folder.open();*/
-
-        //events
-=======
         //ui 
 
         ui = new dat.GUI();
@@ -510,83 +368,43 @@ require(['app'],
 
         //events
 
->>>>>>> gh-pages
         /*document.addEventListener( 'mousedown', on_mouse_dw, false );
         document.addEventListener( 'touchstart', on_touch_start, false );
         document.addEventListener( 'touchmove', on_touch_move, false );*/
         window.addEventListener('resize', resize, false);
 
-<<<<<<< HEAD
-
         camera.position.set(0, 0, 50);
-        lights[1].position.set( -10.0, -10.0, -100.0 );//dir
-        lights[2].position.set( 0.0, 30.0, -80.0);
-        //lights[3].position.set( -30.0, 0.0, -30.0);
-
-        
-        t0 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0} )
-                            .to( { x : 0.0, y: 0.0, z: 60.0,  ry:0, rx: 0}, 5000)
-=======
-        camera.position.set(0, 0, 50);
-        lights[1].position.set( 20.0, 30.0, 100.0 );//dir
-        lights[2].position.set( -10.0, -30.0, 0.0); //point
+        mesh.position.set(0,0,0)
+        lights[1].position.set( 0.0, 0.0, 100.0 );//dir
+        lights[2].position.set( 0.0, 0.0, 0.0); //point
 
         //lights[3].position.set( -30.0, 0.0, -30.0);
         
         t0 = new TWEEN.Tween({ x : 0, y: 30, z:-500, rx: 0 , ry:0} )
                             .to( { x : 0.0, y: 0.0, z: 100.0,  ry:0, rx: 0}, 5000)
->>>>>>> gh-pages
                             .easing( TWEEN.Easing.Exponential.InOut )
                             .onUpdate(function(){
                                      //.rotation.y =  this.y ;
                                      //mesh.rotation.x =  this.x ;
-<<<<<<< HEAD
-                                     lights[1].position.set(this.x, this.y, this.z);
-                                     lights[1].rotation.set(this.rx, this.ry, this.z);
-                            });
-
-        t1 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0} )
-                            .to( { x : 0.0, y: 0.0, z: 100.0,  ry:Math.PI/4, rx: -Math.PI/4}, 5000)
-                            .easing( TWEEN.Easing.Exponential.InOut )
-                            .onUpdate(function(){
-                                     camera.position.set(this.x, this.y, this.z);
-                            });
-
-        t0.start();
-            t1.start();
-
-
-  
-
-        //helpers
-
-        scene.add( new THREE.AxisHelper( 50 ) );
-        scene.add( new THREE.DirectionalLightHelper( lights[1], 20 ));
-        scene.add( new THREE.PointLightHelper( lights[2], 10 ))
-        //scene.add( new THREE.PointLightHelper( lights[3], 10 ))
-
-      
-        //console.info(THREE.UniformsLib.lights)
-=======
                                      //lights[1].position.set(this.x, this.y, this.z);
                                      //lights[1].rotation.set(this.rx, this.ry, this.z);
                             });
 
-        t1 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0, rz:0} )
-                            .to( { x : -18.0, y: -8.0, z: 11.0,  rz:-Math.PI/2, rx: -Math.PI/6, ry: -Math.PI/6}, 5000)
+        t1 = new TWEEN.Tween({ x : 10.810, y: 4.340, z: 200.11,   rx: -0.028, ry: 0, rz:0} )
+                            .to( { x : 10.810, y: 4.340, z: 151.11,   rx: -0.028, ry: 0, rz:0}, 5000)
                             .easing( TWEEN.Easing.Exponential.InOut )
                             .onUpdate(function(){
                                      camera.position.set(this.x, this.y, this.z);
-                                     camera.rotation.set(this.rx - Math.PI/4, this.ry, this.rz);
-                                     mesh.rotation.set( this.rx - 2*Math.PI, this.ry + 2*Math.PI, this.rz ) ;
+                                     camera.rotation.set(this.rx, this.ry, this.rz);
+                                     //mesh.rotation.set( this.rx - 2*Math.PI, this.ry + 2*Math.PI, this.rz ) ;
                             });
 
         t0.start();
         t1.start();
 
         //helpers
-         //scene.add( new THREE.DirectionalLightHelper( lights[1], 20 ));
-          //scene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
+        //scene.add( new THREE.HemisphericalLightHelper( lights[1], 20 ));
+        scene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
         /*scene.add( new THREE.AxisHelper( 50 ) );
        
         scene.add( new THREE.PointLightHelper( lights[2], 10 ))*/
@@ -594,7 +412,6 @@ require(['app'],
 
       
         console.log(uniforms.directionalLights)
->>>>>>> gh-pages
 
         requestAnimationFrame(render);       
     }
@@ -611,11 +428,7 @@ require(['app'],
         // update camera controls
         controls.update();
        
-<<<<<<< HEAD
-        camera.lookAt( mesh.position );
-=======
         camera.lookAt( scene.position );
->>>>>>> gh-pages
 
         //time increase by Math.PI
         time += Date.now() * 0.025;
@@ -624,21 +437,13 @@ require(['app'],
         delta = clock.getDelta();      
 
         //material
-        material.uniforms.time.value += delta * .25;
-<<<<<<< HEAD
-=======
+        //material.uniforms.time.value += delta * .25;
 
->>>>>>> gh-pages
         //post
-        film_fx.uniforms.time.value += delta * .65;
+        //film_fx.uniforms.time.value += delta * .65;
 
 
-<<<<<<< HEAD
-        // animate DirectionalLight
-        scene
-=======
         /** scene
->>>>>>> gh-pages
             .traverse(function(obj_3d, i) {
                 if (obj_3d instanceof THREE.PointLight === true ){
                     //var ang = 0.0010 * time * (i % 2 ? 1 : -1);
@@ -655,16 +460,9 @@ require(['app'],
                       //obj_3d.position.set( ui_controller.lx, ui_controller.ly, ui_controller.lz );
                 }
             });
-<<<<<<< HEAD
-       
-              composer.render(delta);
-        //renderer.render(scene, camera);
-
-=======
        **/
         composer.render(delta);
       
->>>>>>> gh-pages
         stats('frame').end();
         stats().update();
         
@@ -672,13 +470,40 @@ require(['app'],
         
     }
 
-<<<<<<< HEAD
     function resize() {
 
-        var h = window.innerHeight,
-            w = container_dom.clientWidth;
-=======
-    /* */
+        var w = container_dom.clientWidth,
+            h = (3/4)*w;
+
+            container_dom.style.height = h+"px"
+
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(w, h);
+        renderer.setViewport(0, 0, w, h);
+
+        composer.render(delta);
+    }
+ 
+
+    function update_ui( obj ){
+         material.uniforms.p2.value = ui_controller.p2;
+         material.uniforms.p1.value = ui_controller.p1;
+
+         material.uniforms.u_roughness.value = ui_controller.roughness;
+         material.uniforms.u_albedo.value = ui_controller.albedo;
+         material.uniforms.u_shinyness.value = ui_controller.shininess;
+
+        material.uniforms.u_albedoColor.value = new THREE.Color(ui_controller.albedoColor);
+        material.uniforms.u_specularColor.value = new THREE.Color(ui_controller.specularColor);
+
+        material.needsUpdate=true;
+
+    }
+
+
+    /* loading shaders */
 
     function load_file(url, data, cb_fn, err_cb_fn) {
         var req = new XMLHttpRequest();
@@ -686,9 +511,10 @@ require(['app'],
         req.open( 'GET', url, true);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
+                // If we got HTTP status 200 (OK)
                 if ( req.status === 200 ) {
                     cb_fn( req.responseText, data)
-                } else { 
+                } else { // Failed
                     err_cb_fn( url );
                 }
             }
@@ -716,47 +542,6 @@ require(['app'],
             }
     }
 
-    function resize() {
-
-        var w = container_dom.clientWidth,
-            h = (3/4)*w;
-
-        container_dom.style.height = h+"px"
->>>>>>> gh-pages
-
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(w, h);
-        renderer.setViewport(0, 0, w, h);
-
-        composer.render(delta);
-    }
- 
-
-    function update_ui( obj ){
-         material.uniforms.p2.value = ui_controller.p2;
-         material.uniforms.p1.value = ui_controller.p1;
-
-         material.uniforms.u_roughness.value = ui_controller.roughness;
-         material.uniforms.u_albedo.value = ui_controller.albedo;
-         material.uniforms.u_shinyness.value = ui_controller.shininess;
-
-<<<<<<< HEAD
-         material.needsUpdate=true;
-
-    }
-=======
-        material.uniforms.u_albedoColor.value = new THREE.Color(ui_controller.albedoColor);
-        material.uniforms.u_specularColor.value = new THREE.Color(ui_controller.specularColor);
-
-        material.needsUpdate=true;
-
-    }
-
-
-
->>>>>>> gh-pages
     //events
 
     /**function on_mouse_dw(){
@@ -780,7 +565,4 @@ require(['app'],
     window.addEventListener('load', function() {
         init();
     })
-<<<<<<< HEAD
-=======
 
->>>>>>> gh-pages
