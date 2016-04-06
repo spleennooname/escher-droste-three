@@ -34,7 +34,9 @@
  #webgl-demo {
      position: relative;
      margin: 0 auto;
-     max-width: 640px;
+      width: 100%;
+       width: 100%;
+            max-width: 1024px;
      height: 100%;
      z-index: 0;
      display: inline-block;
@@ -135,7 +137,6 @@
      }
 
      #webgl-demo {
-            width: auto;
-            max-width: 1024px
+           
      }
  }

@@ -474,16 +474,16 @@ require(['app'],
     function resize() {
 
         var w = container_dom.clientWidth,
+        
             h = (3/4)*w;
 
-        container_dom.style.height = h+"px"
+        //container_dom.style.height = h+"px"
 
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
 
         renderer.setSize(w, h);
         renderer.setViewport(0, 0, w, h);
-
         composer.render(delta);
     }
  
