@@ -1,7 +1,7 @@
-desktop.ini
-/1024x1024
+*.ini
 *.jpg
 --*.html
-/node_modules
+node_modules
 *.png
-readme.txt
+*.txt
+*.json
