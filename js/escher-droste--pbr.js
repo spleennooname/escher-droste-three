@@ -298,7 +298,7 @@ require(['app'],
 
         // mesh = geom + material
 
-        mesh = new THREE.Mesh(geometry,   material);
+        mesh = new THREE.Mesh(geometry, material);
         mesh.scale.multiplyScalar( 1 );
 
         scene.add( mesh);
@@ -374,7 +374,7 @@ require(['app'],
         //scene.add( new THREE.PointLightHelper( lights[3], 10 ))
 
       
-        console.log(uniforms.directionalLights)
+        //console.log(uniforms.directionalLights)
 
         requestAnimationFrame(render);       
     }
