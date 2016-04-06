@@ -1,4 +1,3 @@
-<<<<<<< HEAD
  
  html{
      font: 16px/1.2 sans-serif;
@@ -13,24 +12,10 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-=======
- html {
-     font: 16px/1.2 sans-serif;
- }
- 
- body {
-     font-size: 1em;
-     -webkit-text-size-adjust: 1em;
-     -ms-text-size-adjust: 1em;
-     text-rendering: optimizeLegibility;
-     -webkit-font-smoothing: subpixel-antialiased;
-     -moz-osx-font-smoothing: grayscale;
->>>>>>> gh-pages
      margin: 0;
      padding: 0;
      overflow: hidden;
      text-align: center;
-<<<<<<< HEAD
      background: black
  }
 
@@ -56,55 +41,10 @@
 }
 
  #DEBUG {
-=======
-     background: black;
-     height: 100%;
-     overflow: hidden;
- }
- 
- canvas {
-     width: 100%;
-     height: 100%;
-     ;
-     margin: 0;
-     padding: 0;
-     touch-action: none;
-     -ms-touch-action: none
- }
- 
- .grab { cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8 8, move; }
- .grabbing { cursor: url(https://mail.google.com/mail/images/2/closedhand.cur) 8 8, move; }
-
- #webgl-demo {
-     position: relative;
-     margin: 0 auto;
-     max-width: 640px;
-     height: 100%;
-     z-index: 0;
-     display: inline-block;
- }
-
- .rs-base {
-     z-index: 1;
-     background-color: transparent;
- }
- 
- .rs-base div.rs-counter-base {}
- 
- .rs-base span.rs-counter-id {}
- 
- .rs-base div.rs-counter-value {}
- 
- .what {
-     position: fixed;
-     left: 0;
->>>>>>> gh-pages
      z-index: 666;
-     left: 0;
-     top: 0;
+     font-size: 100px;
      color: white
  }
-<<<<<<< HEAD
 
 .rs-base{
      z-index: 1;
@@ -212,89 +152,8 @@ body.dg{
  }
  
  .what h1 {
-=======
- 
- .what h1,
- .what h2{
->>>>>>> gh-pages
      margin: 0;
      text-align: left;
      font: 400 .95rem/1.3rem 'Roboto Condensed', tahoma, sans-serif;
      padding: .25rem .25rem
-<<<<<<< HEAD
  }
-=======
- }
- 
-  .what h2{
-    font-size: .75rem;
-  }
-
- body.dg {
-     background: red
- }
- 
- @-webkit-viewport {
-     width: device-width;
- }
- 
- @-moz-viewport {
-     width: device-width;
- }
- 
- @-ms-viewport {
-     width: device-width;
- }
- 
- @viewport {
-     width: device-width;
- }
- /* <=840, phone landscape */
- 
- @media only screen and (max-width: 60em) {
-     html {
-         font-size: 17px;
-         line-height: 28px;
-     }
-     #webgl-demo {
-         width: 100%;
-     }
- }
- /* <=600, phone landscape */
- 
- @media only screen and (max-width: 37.50em) {
-     html {
-         font-size: 15px;
-         line-height: 24px;
-     }
- }
- /* <=480, window xsmall */
- 
- @media only screen and (max-width: 34.30em) {
-     html {
-         font-size: 14px;
-         line-height: 22px;
-     }
- }
- /* <=360, ph.portrait */
- 
- @media only screen and (max-width: 30em) {
-     html {
-         font-size: 13px;
-         line-height: 19px;
-     }
- }
- 
- @media only screen and (min-width: 61em) {
-    
-     html {
-         font-size: 17px;
-         line-height: 28px;
-     }
-
-     #webgl-demo {
-            width: auto;
-            max-width: 1024px
-     }
- }
->>>>>>> gh-pages

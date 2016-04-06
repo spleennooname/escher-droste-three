@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 desktop.ini
 /1024x1024
 *.jpg
@@ -6,14 +5,3 @@ desktop.ini
 /node_modules
 *.png
 readme.txt
-=======
-*.ini
-*.jpg
---*.html
-node_modules
-preview.*
-*.txt
-*.glsl
-Gruntfile.js
-*.json
->>>>>>> gh-pages
