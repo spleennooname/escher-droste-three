@@ -11,7 +11,7 @@ A WebGL demo with GLSL custom shader.
 Still in progress. Any suggestions, comments or criticism welcome.
 
 ## demo :
-[http://spleennooname.github.io/escher-droste-three/index.html](http://spleennooname.github.io/escher-droste-three/index.html)
+[http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html)
 
 ## credits:
 
