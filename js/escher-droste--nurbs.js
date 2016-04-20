@@ -1,66 +1,4 @@
-/**
-// Configure Require.js
-var require_obj = {
 
-    baseUrl: 'js/app',
-
-    shim: {
-
-        'detector': {
-            exports: 'Detector'
-        },
-
-        'tween': {
-            exports: "TWEEN",
-            deps: ['threejs']
-        },
-
-        'stats': {
-            exports: 'stats',
-            deps: ['../rStats']
-        },
-
-        'ui': {
-            exports: "ui",
-            deps: ['../dat.gui.min']
-        },
-
-        'threejs': {
-            exports: 'THREE'
-        },
-
-        'OrbitControls': {
-            deps: ['threejs'],
-            exports: 'THREE'
-        }
-
-    },
-
-    // Third party code lives in js/lib
-    paths: {
-
-        'three': 'three',
-        
-        'threejs': 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.min',
-        'OrbitControls': '../three/OrbitControls',
-
-        'detector': '../Detector',
-        'raf': '../raf',
-        'tween': '../Tween',
-
-        'text': '../require/text',
-        'shader': '../require/shaders'
-    }
-
-};
-
-require
-    .config(require_obj);
-
-require(['app'],
-    function(app) {
-        app.init();
-    })*/
 
 
 var ui_controller = {
@@ -411,7 +349,7 @@ function onload_material() {
     t1.start();
 
     //scene.add( new THREE.DirectionalLightHelper( lights[1], 20 ));
-    scene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
+    //cene.add( new THREE.DirectionalLightHelper( lights[2], 20 ));
     //scene.add( new THREE.AxisHelper( 50 ) );       
    //scene.add( new THREE.PointLightHelper( lights[3], 10 ))     
     //console.log(uniforms.directionalLights)
