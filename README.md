@@ -7,11 +7,13 @@ A WebGL demo with GLSL custom shader.
 
 * Escher-Droste effect
 * Custom GLSL PBR shading
+* NURBS surface
 
 Still in progress. Any suggestions, comments or criticism welcome.
 
 ## demo :
 [http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html)
+[http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html)
 
 ## credits:
 
@@ -26,12 +28,6 @@ http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
 [Does my browser support webgl?](http://www.doesmybrowsersupportwebgl.com/)
 
 [Updated WebGL Stats](http://www.webglstats.com/)
-
-## Changelog
-
-**05 Apr 2016**  
-- auto LoD
-
 
 ## Sources
 
