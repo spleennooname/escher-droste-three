@@ -44,7 +44,7 @@ var last_time, now_time, delta, time, clock,
 
     render_fx, film_fx,
 
-    texture_size = 1024,
+    texture_size = 512,
     texture_url_base = "https://dl.dropboxusercontent.com/u/1358781/lab/webgl/escher-droste/",
     texture_url = "textures/grey_one_1024x1024.jpg",
 
@@ -71,7 +71,7 @@ function init() {
             antialias: false, // to get smoother output
             preserveDrawingBuffer: false // to allow screenshot
         });
-        //renderer.setClearColor(new THREE.Color(0x000000), 1);
+        renderer.setClearColor(new THREE.Color(0x000000), 1);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.gammaInput = true;
         renderer.gammaOutput = true;
@@ -99,7 +99,7 @@ function init() {
 
     // scene         
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2( 0xffffff, 0.0025 );
+    //scene.fog = new THREE.FogExp2( 0xffffff, 0.0025 );
 
     //camera
     camera = new THREE.PerspectiveCamera(45, container_dom.clientWidth / window.innerHeight, 0.01, 200);
@@ -152,8 +152,7 @@ function onload_material() {
     texture_shader.magFilter = THREE.LinearFilter;
     texture_shader.anisotropy = renderer.getMaxAnisotropy();
 
-    texture_size = 1024;
-
+  
     var u_escher = {
         time: { type: "f", value: 0.0 },
         size: { type: "v2", value: new THREE.Vector2(texture_size, texture_size) },
