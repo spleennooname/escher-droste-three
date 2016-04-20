@@ -298,7 +298,7 @@
                                      mesh.rotation.set( this.rx - 2*Math.PI, this.ry + 2*Math.PI, this.rz ) ;
                             });
 
-        t0.start();
+        t1.start();
        // t1.start();
 
         //helpers
