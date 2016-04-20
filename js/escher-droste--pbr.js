@@ -1,66 +1,3 @@
-/**
-// Configure Require.js
-var require_obj = {
-
-    baseUrl: 'js/app',
-
-    shim: {
-
-        'detector': {
-            exports: 'Detector'
-        },
-
-        'tween': {
-            exports: "TWEEN",
-            deps: ['threejs']
-        },
-
-        'stats': {
-            exports: 'stats',
-            deps: ['../rStats']
-        },
-
-        'ui': {
-            exports: "ui",
-            deps: ['../dat.gui.min']
-        },
-
-        'threejs': {
-            exports: 'THREE'
-        },
-
-        'OrbitControls': {
-            deps: ['threejs'],
-            exports: 'THREE'
-        }
-
-    },
-
-    // Third party code lives in js/lib
-    paths: {
-
-        'three': 'three',
-        
-        'threejs': 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.min',
-        'OrbitControls': '../three/OrbitControls',
-
-        'detector': '../Detector',
-        'raf': '../raf',
-        'tween': '../Tween',
-
-        'text': '../require/text',
-        'shader': '../require/shaders'
-    }
-
-};
-
-require
-    .config(require_obj);
-
-require(['app'],
-    function(app) {
-        app.init();
-    })*/
 
 
  var ui_controller = {
@@ -107,7 +44,7 @@ require(['app'],
 
         render_fx, film_fx,
 
-        texture_size = 1024,
+        texture_size = 512,
         texture_url_base = "https://dl.dropboxusercontent.com/u/1358781/lab/webgl/escher-droste/",
         texture_url = "textures/grey_one_1024x1024.jpg",
       
@@ -229,8 +166,7 @@ require(['app'],
         texture_shader.magFilter =THREE.LinearFilter;
         texture_shader.anisotropy = renderer.getMaxAnisotropy();          
     
-        texture_size = 1024;
-      
+        
         var u_escher =  {
                             time: {type: "f", value: 0.0 },
                             size: {type: "v2", value: new THREE.Vector2(texture_size, texture_size) }, 
@@ -343,14 +279,14 @@ require(['app'],
 
         //lights[3].position.set( -30.0, 0.0, -30.0);
         
-        t0 = new TWEEN.Tween({ x : 0, y: 30, z:-500, rx: 0 , ry:0} )
+       /* t0 = new TWEEN.Tween({ x : 0, y: 30, z:-500, rx: 0 , ry:0} )
                             .to( { x : 0.0, y: 0.0, z: 100.0,  ry:0, rx: 0}, 5000)
                             .easing( TWEEN.Easing.Exponential.InOut )
                             .onUpdate(function(){
                                      //.rotation.y =  this.y ;
                                      //mesh.rotation.x =  this.x ;
                                      //lights[1].position.set(this.x, this.y, this.z);
-                                     //lights[1].rotation.set(this.rx, this.ry, this.z);
+                                     //lights[1].rotation.set(this.rx, this.ry, this.z);*/
                             });
 
         t1 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0, rz:0} )
@@ -363,7 +299,7 @@ require(['app'],
                             });
 
         t0.start();
-        t1.start();
+       // t1.start();
 
         //helpers
          //scene.add( new THREE.DirectionalLightHelper( lights[1], 20 ));
