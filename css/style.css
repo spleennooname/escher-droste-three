@@ -16,7 +16,13 @@
      background: black;
      height: 100%;
      overflow: hidden;
+  
  }
+
+ body.bg{
+     background: url(bg_8.jpg) no-repeat center center;
+     background-size: cover;
+ } 
  
  canvas {
      width: 100%;
@@ -28,29 +34,38 @@
      -ms-touch-action: none
  }
  
- .grab { cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8 8, move; }
- .grabbing { cursor: url(https://mail.google.com/mail/images/2/closedhand.cur) 8 8, move; }
-
+ .grab {
+     cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8 8, move;
+ }
+ 
+ .grabbing {
+     cursor: url(https://mail.google.com/mail/images/2/closedhand.cur) 8 8, move;
+ }
+ 
  #webgl-demo {
      position: relative;
      margin: 0 auto;
-      width: 100%;
-       width: 100%;
-            max-width: 1024px;
+     width: auto;
+     
+     
+     height: auto;
+     max-height: 640px;
+
+     width: 100%;
      height: 100%;
      z-index: 0;
      display: inline-block;
- }
+     cursor:url(cursor_4.cur), default;
 
+ }
+ 
  .rs-base {
      z-index: 1;
      background-color: transparent;
  }
  
- .rs-base div.rs-counter-base {}
- 
- .rs-base span.rs-counter-id {}
- 
+ .rs-base div.rs-counter-base {} 
+ .rs-base span.rs-counter-id {} 
  .rs-base div.rs-counter-value {}
  
  .what {
@@ -63,17 +78,17 @@
  }
  
  .what h1,
- .what h2{
+ .what h2 {
      margin: 0;
      text-align: left;
      font: 400 .95rem/1.3rem 'Roboto Condensed', tahoma, sans-serif;
      padding: .25rem .25rem
  }
  
-  .what h2{
-    font-size: .75rem;
-  }
-
+ .what h2 {
+     font-size: .75rem;
+ }
+ 
  body.dg {
      background: red
  }
@@ -130,13 +145,9 @@
  }
  
  @media only screen and (min-width: 61em) {
-    
      html {
          font-size: 17px;
          line-height: 28px;
      }
-
-     #webgl-demo {
-           
-     }
+     #webgl-demo {}
  }
