@@ -286,8 +286,8 @@
                                      //.rotation.y =  this.y ;
                                      //mesh.rotation.x =  this.x ;
                                      //lights[1].position.set(this.x, this.y, this.z);
-                                     //lights[1].rotation.set(this.rx, this.ry, this.z);*/
-                            });
+                                     //lights[1].rotation.set(this.rx, this.ry, this.z);
+                            });*/
 
         t1 = new TWEEN.Tween({ x : -10, y: -10, z:200, rx: 0 , ry:0, rz:0} )
                             .to( { x : -18.0, y: -8.0, z: 11.0,  rz:-Math.PI/2, rx: -Math.PI/6, ry: -Math.PI/6}, 5000)
