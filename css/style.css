@@ -87,7 +87,7 @@
      color: white;
  }
  
- .what h2 {
+ .what h2, .what h2 a {
      font-size: .75rem;
  }
  
