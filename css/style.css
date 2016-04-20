@@ -78,7 +78,8 @@
  }
  
  .what h1,
- .what h2 {
+ .what h2,
+  .what h2 >a {
      margin: 0;
      text-align: left;
      font: 400 .95rem/1.3rem 'Roboto Condensed', tahoma, sans-serif;
