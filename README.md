@@ -9,11 +9,11 @@ A WebGL demo with GLSL custom shader.
 * Custom GLSL PBR shading
 * NURBS surface
 
-Still in progress. Any suggestions, comments or criticism welcome.
+-Still in progress. Any suggestions, comments or criticism welcome-
 
 ## demo :
-[http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html)
-[http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html)
+* [http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html)
+* [http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr-nurbs.html)
 
 ## credits:
 
@@ -21,7 +21,6 @@ TOOL && the [beautiful art of Alex Grey](http://alexgrey.com/)
 https://github.com/stackgl/glsl-diffuse-oren-nayar
 http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
 [Kuranes PBR test playground](http://kuranes.github.io/physically_base_render_test/)
-
 
 ## WebGL?
 
