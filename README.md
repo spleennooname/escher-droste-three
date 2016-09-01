@@ -1,15 +1,15 @@
 
 # Escher-Droste
 
-A WebGL demo with GLSL custom shader.
+A WebGL demo with GLSL custom shader && PBR shading.
 
 ![WebGL ready](https://img.shields.io/badge/webgl-ready-green.svg) ![threejs](https://img.shields.io/badge/threejs-r73-green.svg) ![latest](https://img.shields.io/badge/latest-chrome safari firefox ie-green.svg)
 
-* Escher-Droste effect
+* Custom GLSL shader Escher-Droste effect
 * Custom GLSL PBR shading
 * NURBS surface
 
--Still in progress. Any suggestions, comments or criticism welcome-
+- Still in progress. Any suggestions, comments or criticism are very welcome-
 
 ## demo :
 * [http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html](http://spleennooname.github.io/escher-droste-three/glsl-shader-pbr.html)
@@ -28,7 +28,7 @@ http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
 
 [Updated WebGL Stats](http://www.webglstats.com/)
 
-## Sources
+## Sources on PBR shading
 
 ### The Book
 - http://www.pbrt.org/ (+ [related paper](http://www.pbrt.org/papers.php))
@@ -71,7 +71,6 @@ http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
 - http://alteredqualia.com/xg/examples/deferred_tubelights.html
 - http://diaryofagraphicsprogrammer.blogspot.fr/2013/09/call-for-new-post-processing-pipeline.html
  
-
 ### Brdf Explorer
 - [webgl](http://patapom.com/topics/WebGL/BRDF/ + same author wiki http://wiki.nuaj.net/index.php?title=BRDF)
 - [disney] (http://www.disneyanimation.com/technology/brdf.html) + [instructions](http://www.forceflow.be/2012/08/20/compiling-the-wdas-brdf-explorer/)
