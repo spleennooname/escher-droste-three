@@ -108,7 +108,7 @@ define([
         render_fx, film_fx,
 
         texture_size = 512,
-        texture_url_base = "https://dl.dropboxusercontent.com/u/1358781/lab/webgl/escher-droste/",
+        texture_url_base = "http://spleennooname.github.io/escher-droste-three/assets/",
 
         texture_url = "textures/grey_one_1024x1024.jpg",
 
@@ -148,10 +148,10 @@ define([
             // rstats
             //stats = new rStats(rstats_obj);
 
-            // three init      
+            // three init
             container_dom.appendChild(renderer.domElement);
 
-            // scene         
+            // scene
             scene = new THREE.Scene();
 
             //camera
@@ -263,7 +263,7 @@ define([
             composer.addPass(render_fx);
             composer.addPass(film_fx);
 
-            //ui 
+            //ui
 
             ui = new dat.GUI();
 
@@ -354,7 +354,7 @@ define([
                 //time pitch
                 time += Date.now() * 0.025;
 
-                // delta clock      
+                // delta clock
                 delta_clock = clock.getDelta();
                 //material
                 material.uniforms.time.value += delta_clock  * .25;

@@ -1,6 +1,5 @@
 *.ini
-*.jpg
 --*.html
 node_modules
-*.png 
 *.txt
+.DS_Store

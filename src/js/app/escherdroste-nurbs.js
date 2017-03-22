@@ -116,7 +116,10 @@ define([
         render_fx, film_fx,
 
         texture_size = 512,
-        texture_url_base = "https://dl.dropboxusercontent.com/u/1358781/lab/webgl/escher-droste/",
+
+        /*"http://spleennooname.github.io/escher-droste-three/assets*/
+
+        texture_url_base = "http://spleennooname.github.io/escher-droste-three/assets/",
 
         texture_url = "textures/grey_one_1024x1024.jpg",
 
@@ -156,10 +159,10 @@ define([
             // rstats
             //stats = new rStats(rstats_obj);
 
-            // three init      
+            // three init
             container_dom.appendChild(renderer.domElement);
 
-            // scene         
+            // scene
             scene = new THREE.Scene();
 
             //camera
@@ -275,7 +278,7 @@ define([
             var nurbsSurface = new THREE.NURBSSurface(degree1, degree2, knots1, knots2, nsControlPoints);
 
 
-           
+
 
             geometry = new THREE.ParametricGeometry( function(u, v){return nurbsSurface.getPoint(u, v)}, 40, 40 );
             geometry.uvsNeedUpdate = true;
@@ -302,7 +305,7 @@ define([
             composer.addPass(render_fx);
             composer.addPass(film_fx);
 
-            //ui 
+            //ui
 
             ui = new dat.GUI();
 
@@ -341,7 +344,7 @@ define([
 
         },
 
-     
+
         update_ui = function(obj) {
 
             material.uniforms.p2.value = ui_controller.p2;
@@ -394,7 +397,7 @@ define([
                 //time pitch
                 time += Date.now() * 0.025;
 
-                // delta clock      
+                // delta clock
                 delta_clock = clock.getDelta();
                 //material
                 material.uniforms.time.value += delta_clock  * .25;
