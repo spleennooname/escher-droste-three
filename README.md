@@ -1,7 +1,7 @@
 
 # Escher-Droste
 
-> an WebGL demo with custom PBR shader.
+> implementing PBR in WebGL from scratch.
 
 ![threejs](https://img.shields.io/badge/threejs-r73-green.svg) 
 ![requirejs](https://img.shields.io/badge/requirejs-ok-green.svg) 
@@ -9,7 +9,7 @@
 ## features
 
 * Custom GLSL shader Escher-Droste effect
-* Custom GLSL PBR shading
+* Custom GLSL implementation of PBR( Physically Based Rendering )from scratch
 * NURBS surface
 
 * Still in progress. Any suggestions, comments or criticism are very welcome-
