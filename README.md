@@ -1,9 +1,11 @@
 
 # Escher-Droste
 
-A WebGL demo with GLSL custom shader && PBR shading.
+> an WebGL demo with custom PBR shader.
 
-![WebGL ready](https://img.shields.io/badge/webgl-ready-green.svg) ![threejs](https://img.shields.io/badge/threejs-r73-green.svg) ![latest](https://img.shields.io/badge/latest-chrome safari firefox ie-green.svg)
+![threejs](https://img.shields.io/badge/threejs-r73-green.svg) ![requirejs](https://img.shields.io/badge/requirejs-green.svg)
+
+## features
 
 * Custom GLSL shader Escher-Droste effect
 * Custom GLSL PBR shading
@@ -17,10 +19,10 @@ A WebGL demo with GLSL custom shader && PBR shading.
 
 ## credits:
 
-TOOL && the [beautiful art of Alex Grey](http://alexgrey.com/)
-https://github.com/stackgl/glsl-diffuse-oren-nayar
-http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
-[Kuranes PBR test playground](http://kuranes.github.io/physically_base_render_test/)
+* TOOL && the [beautiful art of Alex Grey](http://alexgrey.com/)
+* [Oren-Nayar diffuse shading](https://github.com/stackgl/glsl-diffuse-oren-nayar)
+* [Optimizing GGX Shaders](http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/)
+* [Kuranes PBR test playground](http://kuranes.github.io/physically_base_render_test/)
 
 ## WebGL?
 
@@ -28,7 +30,7 @@ http://www.filmicworlds.com/2014/04/21/optimizing-ggx-shaders-with-dotlh/
 
 [Updated WebGL Stats](http://www.webglstats.com/)
 
-## Sources on PBR shading
+## refs
 
 ### The Book
 - http://www.pbrt.org/ (+ [related paper](http://www.pbrt.org/papers.php))
