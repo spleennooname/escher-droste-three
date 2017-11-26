@@ -311,7 +311,7 @@ define([
       folder.addColor(ui_controller, "albedoColor").name("albedo color").onChange(update_ui);
       folder.addColor(ui_controller, "specularColor").name("specular color").onChange(update_ui);
       folder.add(ui_controller, 'roughness', 0, 1).name("roughness").onChange(update_ui);
-      folder.add(ui_controller, 'albedo', 0, 1).name("albedo").onChange(update_ui);
+      folder.add(ui_controller, 'albedo', 0, 5).name("albedo").onChange(update_ui);
       folder.add(ui_controller, 'shininess', 0, 1.5).name("shininess").onChange(update_ui);
       folder.open();
 
@@ -404,7 +404,7 @@ define([
         material.uniforms.time.value += delta_clock * .25;
 
         //post
-        //film_fx.uniforms.time.value += delta_clock * .65;
+        film_fx.uniforms.time.value += delta_clock * .65;
 
         composer.render(delta_clock);
 

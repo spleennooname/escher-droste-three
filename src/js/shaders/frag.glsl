@@ -171,74 +171,74 @@ vec2 clog(in vec2 v) {
 
 void main() {
 
-vec2 pos = -1.0 + 2.0 * vUv;
+  vec2 pos = -1.0 + 2.0 * vUv;
 
-/* escher-droste */
+  /* escher-droste */
 
-vec2 logpos = clog(pos);
-vec2 transformed = cmul( logpos, vec2(p2, -p1*log(factor)/PI2 ) );
-vec2 uv = vec2( -transformed.y/PI2, transformed.x/log(factor) - time *.2 );
-vec3 materialColor =  toLinear( texture2D( texture, uv).rgb, 2.0);
+  vec2 logpos = clog(pos);
+  vec2 transformed = cmul( logpos, vec2(p2, -p1*log(factor)/PI2 ) );
+  vec2 uv = vec2( -transformed.y/PI2, transformed.x/log(factor) - time *.2 );
 
-/* lights */
+  vec3 materialColor =  toLinear( texture2D( texture, uv).rgb, 2.2);
 
-float atten = 1.0;
-float diffuse = 1.0;
-float spec = 1.0;
+  /* lights */
 
-vec3 specularColor = u_specularColor;
-vec3 albedoColor = u_albedoColor;
+  float atten = 1.0;
+  float diffuse = 1.0;
+  float spec = 1.0;
 
-vec3 totalLight = vec3( 0.0 );
+  vec3 specularColor = u_specularColor;
+  vec3 albedoColor = u_albedoColor;
+  vec3 totalLight = vec3( 0.0 );
 
-/**#if MAX_POINT_LIGHTS > 0
-for(int i = 0; i < MAX_POINT_LIGHTS; i++) {
+  /**#if MAX_POINT_LIGHTS > 0
+  for(int i = 0; i < MAX_POINT_LIGHTS; i++) {
 
-vec3 L = normalize( pointLightPosition[i] + vViewPosition.xyz );
-vec3 N =  vNormal;
+  vec3 L = normalize( pointLightPosition[i] + vViewPosition.xyz );
+  vec3 N =  vNormal;
 
-//vec3 V = normalize(cameraPosition - vViewPosition );
-vec3 V = normalize( vViewPosition );
-vec3 H = normalize( V + L );
+  //vec3 V = normalize(cameraPosition - vViewPosition );
+  vec3 V = normalize( vViewPosition );
+  vec3 H = normalize( V + L );
 
-float NdotL = max( dot( N, L ), 0.0);
+  float NdotL = max( dot( N, L ), 0.0);
 
-atten = lightAttenuation( length( L ), pointLightDistance[ i ], pointLightDecay[ i ] );
+  atten = lightAttenuation( length( L ), pointLightDistance[ i ], pointLightDecay[ i ] );
 
-diffuse = orenNayarDiffuse( L, V, N, u_roughness, u_albedo);
+  diffuse = orenNayarDiffuse( L, V, N, u_roughness, u_albedo);
 
-spec = LightingFuncGGX_OPT1(N, V,  L, u_roughness, u_shinyness);
+  spec = LightingFuncGGX_OPT1(N, V,  L, u_roughness, u_shinyness);
 
-totalDiffuseLight += pointLightColor[i] * diffuse *atten;
+  totalDiffuseLight += pointLightColor[i] * diffuse *atten;
 
-totalSpecularLight += spec * specularColor * pointLightColor[i] ;
+  totalSpecularLight += spec * specularColor * pointLightColor[i] ;
 
-}
-#endif*/
-
-#if MAX_HEMI_LIGHTS > 0
-  for(int i = 0; i < MAX_HEMI_LIGHTS; i++) {
-    vec3 L = normalize( hemisphereLightDirection[i] );
-    vec3 N = vNormal;
-    vec3 V = normalize( vViewPosition );
-    vec3 H = normalize( V + L );
-    totalLight += computeLight( hemisphereLightSkyColor[i], albedoColor, specularColor, N, V, L, u_albedo, u_roughness, u_shinyness);
   }
-#endif
+  #endif*/
 
-#if MAX_DIR_LIGHTS > 0
-  for(int i = 0; i < MAX_DIR_LIGHTS; i++) {
-    vec3 L = normalize( directionalLightDirection[i] );
-    vec3 N = vNormal;
-    vec3 V = normalize( vViewPosition );
-    vec3 H = normalize( V + L );
-    totalLight += computeLight( directionalLightColor[i], albedoColor, specularColor, N, V, L, u_albedo, u_roughness, u_shinyness);
-  }
-#endif
+  //#if MAX_HEMI_LIGHTS > 0
+    for(int i = 0; i < MAX_HEMI_LIGHTS; i++) {
+      vec3 L = normalize( hemisphereLightDirection[i] );
+      vec3 N = vNormal;
+      vec3 V = normalize( vViewPosition );
+      vec3 H = normalize( V + L );
+      totalLight += computeLight( hemisphereLightSkyColor[i], albedoColor, specularColor, N, V, L, u_albedo, u_roughness, u_shinyness);
+    }
+  //#endif
 
-//total light
-vec3 color = ambientLightColor + materialColor * totalLight;
+  //#if MAX_DIR_LIGHTS > 0
+    for(int i = 0; i < MAX_DIR_LIGHTS; i++) {
+      vec3 L = normalize( directionalLightDirection[i] );
+      vec3 N = vNormal;
+      vec3 V = normalize( vViewPosition );
+      vec3 H = normalize( V + L );
+      totalLight += computeLight( directionalLightColor[i], albedoColor, specularColor, N, V, L, u_albedo, u_roughness, u_shinyness);
+    }
+  //#endif
 
-//to linear space
-gl_FragColor = vec4( ToSRGB( color, 2.0 ), 1.0);
+  //total light
+  vec3 color = ambientLightColor + materialColor * totalLight;
+
+  //to linear space
+  gl_FragColor = vec4( ToSRGB( color, 2.2 ), 1.0);
 }
